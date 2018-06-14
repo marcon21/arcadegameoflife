@@ -2,23 +2,24 @@ import arcade
 from random import randint as ri
 import numpy as np
 
-WIDHT, HEIGHT = 800, 800
-num_cell = 60
-dim_cell = WIDHT // num_cell
-FPS = 60
+WIDHT, HEIGHT = 1920, 1080
+num_cell_row = 192 // 2
+num_cell_col = 108 // 2
+dim_cell = WIDHT // num_cell_row
+FPS = 23.98
 interval = 1 / FPS
 
 matrix = None
 
 def create_matrix():
     global matrix
-    matrix = np.random.randint(2, size=(num_cell, num_cell))
+    matrix = np.random.randint(2, size=(num_cell_row, num_cell_col))
 
 def parse_matrix():
     copied_matrix = np.copy(matrix)
 
-    for x in range(num_cell):
-        for y in range(num_cell):
+    for x in range(num_cell_row):
+        for y in range(num_cell_col):
             num_of_near_cells = 0
 
             try:
@@ -64,8 +65,8 @@ def on_draw(delta_time):
     parse_matrix()
     arcade.start_render()
 
-    for x in range(num_cell):
-        for y in range(num_cell):
+    for x in range(num_cell_row):
+        for y in range(num_cell_col):
             if matrix[x][y] == 1:
                 arcade.draw_rectangle_filled(
                     x * dim_cell + dim_cell // 2,
@@ -73,19 +74,18 @@ def on_draw(delta_time):
                     dim_cell, dim_cell,
                     arcade.color.GREEN
                 )
+
     arcade.finish_render()
 
 
 def main():
     create_matrix()
-    arcade.open_window(WIDHT, HEIGHT, "GAME OF LIFE")
-
+    window = arcade.Window(WIDHT, HEIGHT, "GAME OF PYFE", True)
     arcade.set_background_color(arcade.color.BLACK)
+    window.set_update_rate(interval)
     arcade.schedule(on_draw, interval)
 
-
     arcade.run()
-
 
 if __name__ == "__main__":
     main()
