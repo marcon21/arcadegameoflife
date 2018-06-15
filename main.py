@@ -2,10 +2,10 @@ import arcade
 from random import randint as ri
 import numpy as np
 
-WIDHT, HEIGHT = 1920, 1080
+WIDTH, HEIGHT = 1920, 1080
 num_cell_row = 192 // 2
 num_cell_col = 108 // 2
-dim_cell = WIDHT // num_cell_row
+dim_cell = WIDTH // num_cell_row
 FPS = 23.98
 interval = 1 / FPS
 
@@ -80,7 +80,7 @@ def on_draw(delta_time):
 
 def main():
     create_matrix()
-    window = arcade.Window(WIDHT, HEIGHT, "GAME OF PYFE", True)
+    window = arcade.Window(WIDTH, HEIGHT, "GAME OF PYFE", True)
     arcade.set_background_color(arcade.color.BLACK)
     window.set_update_rate(interval)
     arcade.schedule(on_draw, interval)
