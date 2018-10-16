@@ -64,6 +64,7 @@ def parse_matrix():
 def on_draw(delta_time):
     parse_matrix()
     arcade.start_render()
+    arcade.set_background_color((ri(0, 255), ri(0, 255), ri(0, 255)))
 
     for x in range(num_cell_row):
         for y in range(num_cell_col):
@@ -72,7 +73,7 @@ def on_draw(delta_time):
                     x * dim_cell + dim_cell // 2,
                     y * dim_cell + dim_cell // 2,
                     dim_cell, dim_cell,
-                    arcade.color.GREEN
+                    (ri(0, 255), ri(0, 255), ri(0, 255))
                 )
 
     arcade.finish_render()
@@ -81,7 +82,7 @@ def on_draw(delta_time):
 def main():
     create_matrix()
     window = arcade.Window(WIDTH, HEIGHT, "GAME OF PYFE", True)
-    arcade.set_background_color(arcade.color.BLACK)
+    arcade.set_background_color((ri(0, 255), ri(0, 255), ri(0, 255)))
     window.set_update_rate(interval)
     arcade.schedule(on_draw, interval)
 
